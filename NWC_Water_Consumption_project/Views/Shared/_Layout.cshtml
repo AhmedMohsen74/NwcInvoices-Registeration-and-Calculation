@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>برنامج تسجيل فواتير استهلاك المياه</h1>
+        </header>
+        <main>
+            <section class="main">
+                @RenderBody()
+            </section>
+        <aside>
+            <h2>القائمة</h2>
+            <ul>
+                    <li class ="my-list-item">
+                        <a href="@Url.Action("CreateView","InvoiceRegisteration")">
+                            تسجيل الفاتورة
+                        </a>
+                    </li>
+
+                    <li class="my-list-item">
+                        <a href="@Url.Action("CreateView","UpdateSubscriber")">
+                            تحديث بيانات المشترك
+                        </a>
+                    </li>
+
+                    <li class="my-list-item">
+                        <a href="@Url.Action("CreateView","UpdateSubscription")">
+                            تحديث بيانات اشتراك
+                        </a>
+                    </li>
+
+                    <li class="my-list-item">
+                        <a href="@Url.Action("UpdateView","RealEstate")">
+                            تحديث بيانات نوع العقار
+                        </a>
+                    </li>
+
+            </ul>
+            <ul>
+                    <li class="my-list-item">
+                        <a href="@Url.Action("CreateView","SearchInvoice")">
+                            استفسار عن فاتورة
+                     </a>
+                 </li>
+
+                    <li class="my-list-item">
+                     <a href="@Url.Action("Get_Report_Subscriber","ReportSubscriper")">
+                            تقرير عن المشتركين
+                     </a>
+                 </li>
+
+                    <li class="my-list-item">
+                    <a href="@Url.Action("Get_Report_Subscribtion","ReportSubscription")">
+                          تقرير عن الاشتراكات
+                    </a>
+                </li>
+
+                    <li class="my-list-item">
+                    <a href="@Url.Action("Get_Report_Invoices","ReportInvoices")">
+                         تقرير الفواتير
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                    <li class="my-list-item"><a href="@Url.Action("Button9","Home")">خروج</a></li>
+            </ul>
+        </aside>
+
+        </main>
+
+        @RenderBody()
+        <button class="back-button" > 
+            <a href="@Url.Action("Index","Home")" style="color:blue">
+                رجوع
+            </a>
+        </button>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+ 
+
+        var listItems = document.querySelectorAll('.my-list-item');
+        var currentPageUrl = window.location.href;
+
+        listItems.forEach(function (listItem) {
+            var link = listItem.querySelector('a');
+            var linkUrl = link.href;
+
+            if (linkUrl === currentPageUrl) {
+                listItem.classList.add('active');
+            }
+
+            listItem.addEventListener('click', function () {
+                listItems.forEach(function (listItem) {
+                    listItem.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+       
+
+    </script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .container header {
+        width: 100%;
+        text-align: center;
+        border: 2px solid black;
+    }
+
+    .container header h1 {
+        margin: 15px auto;
+    }
+
+    .container main {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 50px;
+        flex-direction: row-reverse; 
+        direction: rtl;
+    }
+
+    aside h2 {
+        font-size: 30px;
+        color: #4646FF;
+        text-align: center;
+    }
+
+    .main {
+        flex-grow: 1; 
+    }
+
+    aside {
+        border: 2px solid black;
+        padding: 30px;
+        width: 300px; 
+    }
+    main aside {
+        border: 2px solid black;
+        padding: 30px;
+    }
+
+    ul {
+        margin: 50px 0;
+        text-align: right;
+    }
+
+    .my-list-item.active {
+        background-color: slategray;
+        color: white;
+    }
+
+        .my-list-item.active a {
+            color: black;
+        }
+
+        .my-list-item.active:before {
+            content: "";
+
+            background-color: slategray;
+        }
+
+        .my-list-item.active:after {
+            background-color: slategray;
+        }
+
+    .my-list {
+        position: relative;
+        padding-left: 10px;
+    }
+
+        .my-list:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            background-color: white;
+        }
+    ul a {
+            text-decoration: none;
+            color: black;
+            position: relative;
+            right: 20px;
+    }
+
+    ul li {
+            direction: rtl;
+            font-size: 24px;
+            margin: 15px 0;
+            list-style-type: "-";
+    }
+
+    .back-button{
+        padding: 8px 30px;
+        border: 1px solid black;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        background-color: lightblue;
+        width: fit-content;
+        position: fixed;
+        margin-top: 742px;
+        margin-right: 60px;
+        opacity: 0.7;
+        border-radius: 20px;
+    }
+
+
+</style>
+

@@ -1,0 +1,368 @@
+﻿@model NWC_Water_Consumption_project.Models.TblNwcInvoice
+
+@using (Html.BeginForm("SaveInvoice", "InvoiceRegisteration", FormMethod.Post, new { @class = "form-horizontal", @dir = "rtl" }))
+{
+    <div class="container">
+        <main>
+            <section class="main">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong></strong> @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong></strong> @TempData["ErrorMessage"]
+                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <form action="" method="">
+                    <h3>تسجيل فاتورة</h3>
+                    <div class="form-layout">
+                        <div class="right">
+                            <div class="form-input">
+                                <label>رقم الفاتورة</label>
+                                <input type="text" name="NwcInvoicesNo" id="NwcInvoicesNo" value="@Model.NwcInvoicesNo" readonly/>
+                            </div>
+
+                            <div class="form-input">
+                                <label>من تاريخ</label>
+                                <input type="text" name="NwcInvoicesFrom" id="NwcInvoicesFrom"  />
+                            </div>
+
+                            <div class="form-input">
+                                <label>رقم الاشتراك</label>
+                                <input type="text" name="NwcInvoicesSubscriptionNo" id="NwcInvoicesSubscriptionNo"  />
+                            </div>
+
+                            <div class="form-input">
+                                <label>هوية المشترك</label>
+                                <input type="text" name="NwcInvoicesSubscriberNo" id="NwcInvoicesSubscriberNo" readonly />
+                            </div>
+
+                            <div class="form-input">
+                                <label>القراءة السابقة</label>
+                                <input type="text" name="NwcInvoicesPreviousConsumptionAmount" id="NwcInvoicesPreviousConsumptionAmount" readonly />
+                            </div>
+
+                            <div class="form-input">
+                                <label for="quantity">كمية الاستهلاك</label>
+                                <input type="text" name="NwcInvoicesAmountConsumption" id="NwcInvoicesAmountConsumption" readonly />
+                            </div>
+
+                            <div class="form-input">
+                                <label>هل يوجد صرف صحي</label>
+                                <input type="text" name="NwcInvoicesIsThereSanitation" id="NwcInvoicesIsThereSanitation" readonly />
+                            </div>
+
+                            <div class="form-input">
+                                <label for="value">قيمة رسوم الخدمة</label>
+                                <input type="text" name="NwcInvoicesServiceFee" id="NwcInvoicesServiceFee"  />
+                            </div>
+
+                            <div class="form-input">
+                                <label>قيمة استهلاك المياة</label>
+                                <input type="text" name="NwcInvoicesConsumptionValue" id="NwcInvoicesConsumptionValue" readonly />
+                            </div>
+
+                            <div class="form-input">
+                                <label>قيمة الفاتورة</label>
+                                <input type="text" name="NwcInvoicesTotalInvoice" id="NwcInvoicesTotalInvoice" readonly />
+                            </div>
+
+                        </div>
+
+                        <div class="left">
+                            <div>
+                                <div class="form-input">
+                                    <label>تاريخ الفاتورة</label>
+                                    <input type="text" name="NwcInvoicesDate" id="NwcInvoicesDate"  />
+                                </div>
+
+                                <div class="form-input">
+                                    <label>إلي تاريخ</label>
+                                    <input type="text" name="NwcInvoicesTo" id="NwcInvoicesTo" value="@Model.dateto" readonly />
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="form-input bigg">
+                                    <label>الاسم</label>
+                                    <input type="text" name="SubscriberName" id="SubscriberName" readonly />
+                                </div>
+
+                                <div class="form-input">
+                                    <label>القراءة الحالية</label>
+                                    <input type="text" name="NwcInvoicesCurrentConsumptionAmount" id="NwcInvoicesCurrentConsumptionAmount"  />
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="form-input">
+                                    <label>عدد الوحدات</label>
+                                    <input type="text" name="Unit" id="Unit" readonly />
+                                </div>
+
+                                <div class="form-input">
+                                    <label>نسبة الضريبة</label>
+                                    <input type="text" name="NwcInvoicesTaxRate" id="NwcInvoicesTaxRate"  />
+                                </div>
+
+                                <div class="form-input">
+                                    <label>قيمة استهلاك الصرف الصحي</label>
+                                    <input type="text" name="NwcInvoicesWastewaterConsumptionValue" id="NwcInvoicesWastewaterConsumptionValue" readonly />
+                                </div>
+
+                                <div class="form-input">
+                                    <label>اجمالي الفاتورة</label>
+                                    <input type="text" name="NwcInvoicesTotalBill" id="NwcInvoicesTotalBill" readonly />
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                        <button class="button-spacing"  style="background-color: blue">حفظ</button>
+
+                    <button class="button-spacing" style="background-color: red" onclick="Clear()">إنهاء</button>
+
+                </form>
+
+            </section>
+        </main>
+    </div>
+}
+
+
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 30px 70px;
+        border: 2px solid black;
+    }
+
+        form h3 {
+            align-self: start;
+            font-size: 25px;
+            margin-bottom: 30px;
+        }
+
+    .form-layout {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 60px;
+    }
+
+    .form-input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 18px;
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+        .form-input label {
+            width: 200px;
+        }
+
+        .form-input input {
+            min-width: 20px;
+            padding: 5px;
+            border: 2px solid black;
+            font-size: 18px;
+        }
+
+    .form-control {
+        display: flex;
+        margin-top: 30px;
+        flex-direction: row;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+        .form-control button {
+            padding: 15px 60px;
+            border: 1px solid black;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4646FF;
+        }
+
+    .button-spacing {
+        padding: 15px 60px;
+        border: 1px solid black;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        background-color: #4646FF;
+        margin-top:30px;
+        margin-right: 290px;
+    }
+    form .left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .bigg input {
+        text-align: center;
+    }
+
+    .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+
+    .alert button.close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0.75rem 1.25rem;
+        color: inherit;
+    }
+
+    .alert-success, .alert-danger {
+        font-size: 23px;
+    }
+
+    .alert {
+        font-size: 23px;
+    }
+
+</style>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#NwcInvoicesSubscriptionNo").change(function () {
+            var newValue = $(this).val();
+            myFunction(newValue);
+        });
+    });
+
+    function myFunction(newValue) {
+        $.post("/InvoiceRegisteration/GetSubscriberData",
+            { SubscriptionID: newValue })
+            .done(function (response) {
+                $('#NwcInvoicesSubscriberNo').val(response.da1);
+                $('#NwcInvoicesIsThereSanitation').val(response.da2);
+                $('#NwcInvoicesPreviousConsumptionAmount').val(response.da3);
+                $('#Unit').val(response.da4);
+                $('#SubscriberName').val(response.da5);
+                $('#NwcInvoicesAmountConsumption').val(response.ca1);
+
+            })
+            .fail(function (xhr, status, error) {
+                console.error(xhr.responseText);
+                console.error(xhr.status);
+            });
+    }
+
+    $(document).ready(function () {
+        $("#NwcInvoicesCurrentConsumptionAmount").change(function () {
+            var newValue = $(this).val();
+            var lastvalue = $("#NwcInvoicesPreviousConsumptionAmount").val();
+            Usage(newValue, lastvalue);
+        });
+    });
+
+    function Usage(newValue, lastvalue) {
+        $.post("/InvoiceRegisteration/AmountOfConsumption",
+            {
+                CurrentCalc: newValue,
+                LastCalc: lastvalue
+            })
+            .done(function (response) {
+                $('#NwcInvoicesAmountConsumption').val(response.ca1);
+            })
+            .fail(function (xhr, status, error) {
+                console.error(xhr.responseText);
+                console.error(xhr.status);
+            });
+    }
+
+    $(document).ready(function () {
+        $("#NwcInvoicesTaxRate").change(function () {
+
+            var AmoutConsumption = $("#NwcInvoicesAmountConsumption").val();
+            var UnitsNumber = $("#Unit").val();
+            var ServiceFee = $("#NwcInvoicesServiceFee").val();
+            var Tax_Rate = $("#NwcInvoicesTaxRate").val();
+            var IsThereSanitation = $("#NwcInvoicesIsThereSanitation").val();
+
+            Prices(AmoutConsumption, UnitsNumber, ServiceFee, Tax_Rate, IsThereSanitation);
+        });
+    });
+
+    function Prices(w, u, s, t, is) {
+        $.post("/InvoiceRegisteration/CalcEveryThing",
+            {
+                AmoutConsumption: w,
+                UnitsNumber: u,
+                ServiceFee: s,
+                Tax_Rate: t,
+                IsThereSanitation: is
+            }).done(function (response) {
+                $('#NwcInvoicesConsumptionValue').val(response.da1);
+                $('#NwcInvoicesWastewaterConsumptionValue').val(response.da2);
+                $('#NwcInvoicesTotalInvoice').val(response.da3);
+                $('#NwcInvoicesTotalBill').val(response.da4);
+            })
+            .fail(function (xhr, status, error) {
+                console.error(xhr.responseText);
+                console.error(xhr.status);
+            });
+    }
+    function Clear() {
+        $('#NwcInvoicesNo').val("");
+        $('#NwcInvoicesDate').val("");
+        $('#NwcInvoicesFrom').val("");
+        $('#NwcInvoicesTo').val("");
+        $('#Unit').val("");
+        $('#NwcInvoicesSubscriptionNo').val("");
+        $('#NwcInvoicesSubscriberNo').val("");
+        $('#SubscriberName').val("");
+        $('#NwcInvoicesPreviousConsumptionAmount').val("");
+        $('#NwcInvoicesCurrentConsumptionAmount').val("");
+        $('#NwcInvoicesAmountConsumption').val("");
+        $('#NwcInvoicesServiceFee').val("");
+        $('#NwcInvoicesTaxRate').val("");
+        $('#NwcInvoicesIsThereSanitation').val("");
+        $('#NwcInvoicesConsumptionValue').val("");
+        $('#NwcInvoicesWastewaterConsumptionValue').val("");
+        $('#NwcInvoicesTotalInvoice').val("");
+        $('#NwcInvoicesTaxValue').val("");
+        $('#NwcInvoicesTotalBill').val("");
+    }
+</script>
+

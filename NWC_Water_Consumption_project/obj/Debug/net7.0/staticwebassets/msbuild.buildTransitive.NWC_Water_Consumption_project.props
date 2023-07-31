@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\NWC_Water_Consumption_project.props" />
+</Project>

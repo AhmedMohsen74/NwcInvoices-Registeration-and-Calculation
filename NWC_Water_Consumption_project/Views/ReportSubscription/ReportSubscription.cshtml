@@ -1,0 +1,70 @@
+﻿@model List<NWC_Water_Consumption_project.Models.TblNwcSubscriptionFile>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr class="rtl">
+                <th>م</th>
+                <th>رقم الاشتراك</th>
+                <th>رقم المشترك</th>
+                <th>الأسم</th>
+                <th>رقم الجوال</th>
+                <th>نوع العقار</th>
+                <th>عدد الوحدات</th>
+                <th>هل يوجد صرف صحي</th>
+                <th>اخر قراءة للعداد</th>
+                <th>ملاحظات</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var subscriber in Model)
+            {
+            <tr class="rtl">
+                <td>@subscriber.Counter</td>
+                <td>@subscriber.NwcSubscriptionFileNo</td>
+                <td>@subscriber.NwcSubscriptionFileSubscriberCode</td>
+                <td>@subscriber.Name</td>
+                <td>@subscriber.PhoneNumber</td>
+                <td>@subscriber.Real_Estate_Type</td>
+                <td>@subscriber.NwcSubscriptionFileUnitNo</td>
+                <td>@subscriber.Yes_or_No</td>
+                <td>@subscriber.NwcSubscriptionFileLastReadingMeter</td>
+                <td>@subscriber.NwcSubscriptionFileReasons</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 19px;
+    }
+
+    th {
+        background-color: #4646FF;
+        color: white;
+    }
+
+    .rtl {
+        direction: rtl;
+        font-family: 'Arabic';
+    }
+
+    .table-container {
+        max-height: 650px; /* Set a maximum height for the container */
+        overflow-y: auto; /* Add a vertical scrollbar */
+    }
+</style>

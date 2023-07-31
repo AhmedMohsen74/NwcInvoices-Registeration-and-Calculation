@@ -1,0 +1,74 @@
+﻿@model List<NWC_Water_Consumption_project.Models.TblNwcInvoice>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr class="rtl">
+                <th>م</th>
+                <th>رقم الفاتورة</th>
+                <th>رقم الإشتراك</th>
+                <th>رقم المشترك</th>
+                <th>الأسم</th>
+                <th>تاريخ الفاتورة</th>
+                <th>الإستهلاك السابق</th>
+                <th>الإستهلاك الحالية</th>
+                <th>كمية الإستهلاك</th>
+                <th>مجموع الفاتورة</th>
+                <th>إجمالي الفاتورة</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var invoice in Model)
+            {
+                <tr class="rtl">
+                    <td>@invoice.Counter</td>
+                    <td>@invoice.NwcInvoicesNo</td>
+                    <td>@invoice.NwcInvoicesSubscriptionNo</td>
+                    <td>@invoice.NwcInvoicesSubscriberNo</td>
+                    <td>@invoice.Name</td>
+                    <td>@invoice.dateto</td>
+                    <td>@invoice.NwcInvoicesPreviousConsumptionAmount</td>
+                    <td>@invoice.NwcInvoicesCurrentConsumptionAmount</td>
+                    <td>@invoice.NwcInvoicesAmountConsumption</td>
+                    <td>@invoice.NwcInvoicesTotalInvoice</td>
+                    <td>@invoice.NwcInvoicesTotalBill</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 16px;
+    }
+
+    th {
+        background-color: #4646FF;
+        color: white;
+    }
+
+    .rtl {
+        direction: rtl;
+        font-family: 'Arabic';
+    }
+
+    .table-container {
+        max-height: 650px; /* Set a maximum height for the container */
+        overflow-y: auto; /* Add a vertical scrollbar */
+    }
+
+</style>
+
+
